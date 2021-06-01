@@ -64,3 +64,10 @@ git clone <repository> <directory>
 git clone https://github.com/HyungchulCha/git_tutorial.git git_tutorial_clone
 username: <name>
 password: <password>
+
+복제한 저장소에서 수정했다고 가정
+git add memo.txt
+git commit -m "comment"
+
+복제한 저장소에서 원격 저장소를 push할 때는 origin master를 생략할 수 있다.
+git push
