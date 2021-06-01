@@ -88,4 +88,4 @@ merge라는 작업을 진행하여 다른 사람의 업데이트 이력을 내 �
 병합 기능은 Git 에서 변경한 부분을 자동으로 통합해 주는 기능입니다. 그러나 경우에 따라 자동으로 병합할 수 없는 경우도 있습니다.
 모든 충돌 부분을 수정한 후에, 다시 커밋을 수행하면 됩니다.
 
-작업순서 : add - commit - pull - merge - add - commit -push
+작업순서 : add - commit - pull - merge - add - commit - push
