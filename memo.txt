@@ -1,0 +1,18 @@
+설치
+git-scm
+
+초기 이름, 이메일 등록(전역)
+git config --global user.name "name"
+git config --global user.email "email"
+
+특정 폴더를 Git저장소로 등록하려면, Git 저장소를 사용할 폴더로 이동 후
+git init
+
+폴더 작업트리와 인덱스 상태를 확인하려면
+git status
+
+인덱스에 등록하려면(스테이지에 등록하려면)
+개별 파일, 여러 파일
+git add <file1> <file2> ...
+하위 모든 파일
+git add .
