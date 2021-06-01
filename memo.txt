@@ -5,6 +5,10 @@ git-scm
 git config --global user.name "name"
 git config --global user.email "email"
 
+
+
+로컬 저장소
+
 특정 폴더를 Git저장소로 등록하려면, Git 저장소를 사용할 폴더로 이동 후
 git init
 
@@ -16,3 +20,50 @@ git status
 git add <file1> <file2> ...
 하위 모든 파일
 git add .
+
+커밋
+git commit -m "comment"
+
+저장소 변경 이력 조회
+git log
+
+
+
+내 로컬 저장소에서 변경 이력을 원격저장소에 공유하려면 먼저 원격 저장소에 업로드해야 한다.
+push를 실행하면 원격 저장소에 내 변경 이력이 업로드되어 원격 저장소와 로컬 저장소가 동일한 상태가 된다.
+
+누군가의 변경이력이 적용된 원격 저장소가 있으면 복제해와서 내 PC에서 직접 작업할 수 있다.
+변경 이력도 함께 로컬 저장소에 복제되어와서 원격 저장소와 똑같이 이력을 참조하고 커밋을 진행할 수 있다.
+
+이미 가져온 상태라고 가정하고 다른 사람이 원격 저장소에 올려놓은(push) 변경 내용을 내 로컬 저장소에도 적용(pull)할 필요가 있다.
+
+
+
+원격 저장소 
+github
+
+원격 저장소에 로컬 저장소의 이력을 push
+원격 저장소의 주소를 기록해두면 push 할 때마다 긴 원격 저장소 주소를 입력할 필요가 없다. 
+origin 이라는 이름으로 원격 저장소를 등록하고 push 하자
+
+원격 저장소를 추가
+git remote add <name> <url>
+git remote add origin https://github.com/HyungchulCha/git_tutorial.git
+
+원격 저장소에 push
+git push -u <repository> <refspec> ...
+-u : 한번 -u를 지정하면 이후에는 브랜치명 지정을 생략할 수 있다. 단, 비어있는 원격저장소에 최초로 push할 때는 원격 저장소명과 브랜치명을 생략할 수 없다.
+repository : 현재는 origin 으로 등록했으므로 origin
+refspec : push 할 브랜치를 지정
+git push -u origin master
+
+
+
+clone
+git clone <repository> <directory>
+git clone https://github.com/HyungchulCha/git_tutorial.git git_tutorial_clone
+username: <name>
+password: <password>
+
+
+이부분에서 충돌나려나
