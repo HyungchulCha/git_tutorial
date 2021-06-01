@@ -174,3 +174,81 @@ A 브랜치를 'master' 브랜치에 rebase 하면, A 브랜치의 이력이 'ma
   릴리즈 브랜치에서 기능을 점검하며 발견한 버그 수정 사항은 'develop' 브랜치에도 적용해 주어야 합니다. 그러므로 배포 완료 후 'develop' 브랜치에 대해서도 병합 작업을 수행합니다.
 - 핫픽스 브랜치(Hotfix branch)
   배포한 버전에 긴급하게 수정을 해야 할 필요가 있을 경우, 'master' 브랜치에서 분기하는 브랜치입니다. 관례적으로 브랜치 이름 앞에 'hotfix-'를 붙입니다.
+
+branch 만들기
+git branch <branchname>
+git branch branch-01
+
+branch list 확인
+git branch
+
+branch 전환
+git checkout <branch>
+git checkout branch-01
+git checkout -b <branchname> : branch 생성과 체크아웃을 한꺼번에 실행
+
+branch 병합
+'master' 브랜치에 'branch-01'를 넣기 위해서는 우선 'master' 브랜치에 'HEAD'가 위치하게 만들어야 합니다. 이 때에는 checkout 명령어를 이용하여 현재 사용중인 브랜치를 'master'로 전환합니다.
+git checkout master
+
+병합할 커밋 이름을 넣어 실행하면, 지정한 커밋 내용이 'HEAD'가 가리키고 있는 브랜치에 넣어집니다. 
+'HEAD'는 현재 사용중인 브랜치에 위치하게 됩니다. 현재 branch-01에 위치한다.
+git merge <commit>
+git merge branch-01
+
+branch 삭제
+git branch -d <branchname>
+
+(이전 병합 취소 : git reset --hard HEAD~)
+
+
+
+rebase로 병합하기
+rebase 를 먼저 실행한 후 병합을 시도한다면 그 이력을 하나의 줄기로 만들 수도 있습니다. 
+git checkout branch-02
+git rebase master
+<충돌해결> - 충돌 부분 수정한 후에는 commit이 아니라 rebase 명령에 --continue 옵션을 지정하여 실행해야 한다.
+git add <filename> or git add .
+git rebase --continue
+(git rebase --abort : rebase 자체를 취소)
+
+branch-02 브랜치가 두 브랜치 앞 쪽으로 위치가 옮겨졌을 뿐 master 브랜치는 아직 branch-02의 변경사항이 적용되지 못한 상태로 뒤에 남겨져 있습니다.
+git checkout master
+git merge branch-02
+
+생각 : 
+  A 브랜치에서 작업한 내용을 
+  - rebase할 브랜치를 지정하고 
+  - 충돌 부분 수정한 후(A 브랜치에서) 
+  - 다시 add 
+  - 다시 rebase --contiue (rebase로 충돌한 부분 수정한 후에는 commit 아님)
+  - 지정 당한 브랜치로 이동 후
+  - git merge A 브랜치 처리해야 완료된다.
+
+
+원격저장소
+pull = fetch + merge
+가져와서 병합 (충돌난 부분은 수동으로 해결한 다음 직접 commit)
+fetch 
+데이터를 로컬에 가져오기만 한다. fetch 를 실행하면, 원격 저장소의 최신 이력을 확인할 수 있습니다. 이 때 가져온 최신 커밋 이력은 이름 없는 브랜치로 로컬에 가져오게 됩니다. 이 브랜치는 'FETCH_HEAD'의 이름으로 체크아웃 할 수도 있습니다.
+원격 저장소의 내용을 로컬 저장소의 'master'에 통합하고 싶은 경우에는, 'FETCH_HEAD' 브랜치를 merge 하거나 다시 pull 을 실행하면 됩니다.
+push
+로컬 저장소의 데이터를 원격 저장소로 밀어넣기. 로컬 저장소에서 원격 저장소로 push(밀어넣기) 할 때에는, push 한 브랜치가 'fast-forward 병합' 방식으로 처리 되도록 지정해 둘 필요가 있습니다. 원격 저장소에서 모두가 공유하고 있는 커밋은 기본적으로 덮어쓰거나(overwrite) 임의로 변경해서는 안됩니다. 만약 그럴 경우, 그 원격 저장소와 동기화되어 있는 다른 저장소들의 이력에 모두 영향을 준다.
+
+
+
+태그 (Tag)
+태그란, 커밋을 참조하기 쉽도록 알기 쉬운 이름을 붙이는 것을 말합니다.
+한 번 붙인 태그는 브랜치처럼 위치가 이동하지 않고 고정됩니다.
+Git 에서는 일반적으로 이름 정보만을 갖는 '태그(Lightweight tag)'와 보다 상세한 정보를 포함하는 '주석 태그(Annotated tag)', 이 두 가지 태그를 사용할 수 있습니다.
+
+일반 태그(Lightweight tag)
+  이름만 붙일 수 있어요
+
+주석 태그(Annotated tag)
+  이름을 붙일 수 있어요
+  태그에 대한 설명도 포함할 수 있어요
+  서명도 넣을 수 있어요
+  이 태그를 만든 사람의 이름, 이메일과 태그를 만든 날짜 정보도 포함시킬 수 있어요
+ 
+보통 '릴리스 브랜치(Release branch)'에서는 주석 태그를 사용하여 설명이나 서명을 넣은 보다 상세한 정보를 포함하는 태그를 사용하고, 로컬에서 일시적으로 사용하는 '토픽 브랜치(Topic branch)'에서는 이름만 만들어 붙이는 태그를 사용합니다.
