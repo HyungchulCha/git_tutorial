@@ -46,7 +46,7 @@ github
 원격 저장소의 주소를 기록해두면 push 할 때마다 긴 원격 저장소 주소를 입력할 필요가 없다. 
 origin 이라는 이름으로 원격 저장소를 등록하고 push 하자
 
-원격 저장소를 추가
+원격 저장소를 추가(등록)
 git remote add <name> <url>
 git remote add origin https://github.com/HyungchulCha/git_tutorial.git
 
@@ -71,3 +71,11 @@ git commit -m "comment"
 
 복제한 저장소에서 원격 저장소를 push할 때는 origin master를 생략할 수 있다.
 git push
+
+
+
+pull
+원격 저장소에서 원래 폴더로 최신 변경 내용을 가져와보자
+git pull <repository> <refspec> ...
+만약 저장소명이 생략되면 origin의 이름으로 등록되어 있는 저장소 밑에 pull을 수행하게 된다.
+git pull origin master
