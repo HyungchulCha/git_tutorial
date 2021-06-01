@@ -79,3 +79,9 @@ pull
 git pull <repository> <refspec> ...
 만약 저장소명이 생략되면 origin의 이름으로 등록되어 있는 저장소 밑에 pull을 수행하게 된다.
 git pull origin master
+
+
+
+merge
+내가 pull 을 실행한 후 다른 사람이 push 를 하여 원격 저장소를 업데이트 해버린 경우에는 내 push 요청이 거부
+merge라는 작업을 진행하여 다른 사람의 업데이트 이력을 내 저장소에도 갱신 해야한다.
