@@ -50,6 +50,9 @@ origin 이라는 이름으로 원격 저장소를 등록하고 push 하자
 git remote add <name> <url>
 git remote add origin https://github.com/HyungchulCha/git_tutorial.git
 
+설정한 저장소 이름 삭제
+git remote rm origin
+
 원격 저장소에 push
 git push -u <repository> <refspec> ...
 -u : 한번 -u를 지정하면 이후에는 브랜치명 지정을 생략할 수 있다. 단, 비어있는 원격저장소에 최초로 push할 때는 원격 저장소명과 브랜치명을 생략할 수 없다.
