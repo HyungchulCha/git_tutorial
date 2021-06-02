@@ -2,5 +2,4 @@ master
 branch-01
 branch-02
 branch-03
-
-amend 사용해보자
+amend
